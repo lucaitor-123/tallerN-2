@@ -1,0 +1,64 @@
+@startuml
+class Cliente {
+    - RUT: String
+    - nombre: String
+    - apellido: String
+    - fechaDeNacimiento: String
+    - tipoLicencia: String
+
+
+    + cliente(RUT: String, nombre: String, apellido: String, fechaDeNacimiento: String, tipoLicencia: String)
+    + getRUT(): String
+    + getNombreCompleto(): String
+    + validarRut(): boolean
+    + validarLicencia(): boolean
+}
+
+class Vehiculo {
+    - patente: String
+    - numeroRuedas: int
+    - tipoVehiculo: String
+    - numeroAsientos: int
+    - estado: String
+
+    + Vehiculo(patente: String, numeroRuedas: int, tipoVehiculo: String, numeroAsiento: int, estado:String)
+    + getPatente(): String
+    + getTipoVehiculo(): String
+    + getNumeroAsientos(): int
+    + getEstado(): String
+}
+
+class Arriendo {
+    - cliente: Cliente
+    - vehiculo: Vehiculo
+    - dias: int
+    - fechaInicio: String
+    - fechaTermino: String
+
+    + Arriendo(cliente: Cliente, vehiculo: Vehiculo, dias: int)
+    + getCliente(): Cliente
+    + getVehiculo(): Vehiculo
+    + getDias(): int
+    + getFechaInicio(): String
+    + getFechaTermino(): String
+}
+
+class RegistroClientes {
+     - clientes: List<Cliente>
+     - vehiculos: List<Vehiculo>
+     - arriendos: List<Arriendo>
+
+     + inscribirCliente(cliente: Cliente): boolean
+     + inscribirVehiculo(vehiculo: Vehiculo): boolean
+     + buscarClientePorRUT(RUT: String): Cliente
+     + buscarVehiculoPorPatente(patente: String): Vehiculo
+     + eliminarCliente(RUT: String): boolean
+     + actualizarInformacionCliente(RUT: String, nombre: String, apellido: String): boolean
+}
+
+Cliente -- Arriendo: "realiza" >
+Vehiculo -- Arriendo: "es arrendado por" >
+RegistroClientes -- Cliente: "Gestiona" >
+RegistroClientes -- Vehiculo: "Gestiona" >
+RegistroClientes -- Arriendo: "Gestiona" >
+@enduml

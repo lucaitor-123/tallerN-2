@@ -1,0 +1,36 @@
+@startuml
+skin rose
+entity Cliente {
+    RUT
+    nombre
+    apellido
+    fecha de nacimiento
+    tipo de licencia
+}
+
+entity Vehiculo {
+    patente
+    numeros de ruedas
+    tipos de vehiculo
+    numeros de asientos
+    estado
+}
+
+entity Arriendo {
+    cliente
+    vehiculo
+    dias
+}
+
+entity RegistroCLiente as "registro de cliente" {
+    clientes
+    vehiculos
+    arriendos
+}
+
+Cliente -- Arriendo: "realiza" >
+Vehiculo -- Arriendo: "es arrendado por" >
+RegistroCLiente -- Cliente: "Gestiona" >
+RegistroCLiente -- Vehiculo: "Gestiona" >
+RegistroCLiente -- Arriendo: "Gestiona" >
+@enduml
